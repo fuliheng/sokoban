@@ -1,4 +1,7 @@
+'use strict';
+
 var http = require('http');
+
 http.createServer((request, response) => {
     let fs = require('fs')
     fs.readFile('index.html', (err, data) => {
@@ -8,7 +11,7 @@ http.createServer((request, response) => {
         response.write(data);
         response.end();
     });
-}).listen(8081);
+}).listen(8080);
 // log message to Console
-console.log('Server running at http://127.0.0.1:8081/');
+console.log('Server running at http://127.0.0.1:8080/');
 // index.js
