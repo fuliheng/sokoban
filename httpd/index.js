@@ -3,6 +3,10 @@
 var http = require('http');
 
 http.createServer((request, response) => {
+  request.on('end',()=>{
+    console.log('Request method: '+request.method);
+    console.log('Request url: '+ request.url);
+  })
     let fs = require('fs')
     fs.readFile('index.html', (err, data) => {
         response.writeHead(200, {
