@@ -26,7 +26,6 @@ http.createServer((request, response) => {
           response.end();
         }
       });
-        fs.readfile('../htdocs/css/styles.css');
       break;
     default:
     consloe.log('未定義的存取：'+request.url);
