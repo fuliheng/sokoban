@@ -7,7 +7,7 @@ http.createServer((request, response) => {
   let postData = '';
   request.on('data',(chunk) =>{
     postData += chunk;
-};
+}
     console.log(
       '接收的POST DATA 片段Ｋ：['+chunk+'].'
     );
