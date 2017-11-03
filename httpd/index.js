@@ -10,7 +10,7 @@ http.createServer((request, response) => {
     console.log(
       '接收的POST DATA 片段Ｋ：['+chunk+'].'
     );
-) ;
+});
   request.on('end',()=>{
     switch(request.url){
       case '/':
@@ -27,14 +27,28 @@ http.createServer((request, response) => {
         }
       });
       break;
-      case '/htdocs/assets/css':
+      case '/assets/css/styles.css':
         fs.readFile('../htdocs/assets/css/styles.css',(err,data)=>{
           if(err){
             consloe.log('檔案讀取錯誤');
           }
           else{
             response.writeHead(200,{
-              'Content-Type':'text/html'
+              'Content-Type':'text/css'
+            });
+          response.write(data);
+          response.end();
+        }
+      });
+      break;
+      case '/assets/png/SokobanClone_byVellidragon.png':
+        fs.readFile('../htdocs/assets/png/SokobanClone_byVellidragon.png',(err,data)=>{
+          if(err){
+            consloe.log('檔案讀取錯誤');
+          }
+          else{
+            response.writeHead(200,{
+              'Content-Type':'image/png'
             });
           response.write(data);
           response.end();
@@ -42,7 +56,7 @@ http.createServer((request, response) => {
       });
       break;
     default:
-    consloe.log('未定義的存取：'+request.url);
+    console.log('未定義的存取：'+request.url);
     response.end();
       break;
     }
