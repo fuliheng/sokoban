@@ -10,7 +10,7 @@ http.createServer((request, response) => {
     console.log(
       '接收的POST DATA 片段Ｋ：['+chunk+'].'
     );
-) ;
+ });
   request.on('end',()=>{
     switch(request.url){
       case '/':
