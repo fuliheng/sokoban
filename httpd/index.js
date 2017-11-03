@@ -27,6 +27,20 @@ http.createServer((request, response) => {
         }
       });
       break;
+      case '/htdocs/assets/css':
+        fs.readFile('../htdocs/assets/css/styles.css',(err,data)=>{
+          if(err){
+            consloe.log('檔案讀取錯誤');
+          }
+          else{
+            response.writeHead(200,{
+              'Content-Type':'text/html'
+            });
+          response.write(data);
+          response.end();
+        }
+      });
+      break;
     default:
     consloe.log('未定義的存取：'+request.url);
     response.end();
