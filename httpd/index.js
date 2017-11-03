@@ -5,9 +5,9 @@ var http = require('http');
 http.createServer((request, response) => {
   let fs = require('fs');
   let postData = '';
-  request.on('data',(chunk) =>
+  request.on('data',(chunk) =>{
     postData += chunk;
-
+};
     console.log(
       '接收的POST DATA 片段Ｋ：['+chunk+'].'
     );
