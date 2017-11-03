@@ -14,14 +14,14 @@ http.createServer((request, response) => {
   request.on('end',()=>{
     switch(request.url){
       case '/':
-        fs.readFile('../htdocs/index.html',(err.data)=>{
+        fs.readFile('../htdocs/index.html',(err,data)=>{
           if(err){
             consloe.log('檔案讀取錯誤');
           }
           else{
-          response.writeHead(200,{
-          'Content-Type':'text/html'
-          })
+            response.writeHead(200,{
+              'Content-Type':'text/html'
+            });
           response.write(data);
           response.end();
         }
