@@ -1,92 +1,68 @@
-/**
- *  @file       index.js
- *  @brief      The entry function of the httpd.
- *  @author     FU LIheng (funono99@gmail.com)
- *  @date       10/03/2017 created.
- *  @date       11/10/2017 last modified.
- *  @version    0.1.0
- *  @copyright  MIT, (C) 2017 Yiwei Chiao
- *  @details
- *
- *  The entry function of the httpd.
- */
 'use strict';
 
 let http = require('http');
 
-const routingTable = {
-  '/': {
-      url: '../htdocs/index.html',
-      type: 'text/html'
-    },
-  '/styles.css': {
-      url: '../htdocs/assets/css/styles.css',
-      type: 'text/css'
-    },
-  '/SokobanClone_byVellidragon.png': {
-      url: '../htdocs/assets/png/SokobanClone_byVellidragon.png',
-      type: 'image/png'
-    },
-};
-
-/**
-  * 利用 http.ServerResponse 物件回傳檔案內容
-  *
-  * @name serve
-  * @function
-  * @param response - http.ServerResponse 物件
-  * @param fname - 要回傳的檔案名
-  * @param datatype - 回傳檔案內容的 Mine-Type
-  * @returns {undefined}
-  */
-let serve = (response, fname, datatype) => {
-  let fs = require('fs');
-
-  fs.readFile(fname, (err, data) => {
-    if (err) {
-      console.log('檔案讀取錯誤');
-    }
-    else {
-      response.writeHead(200, {
-        'Content-Type': datatype
-      });
-
-      response.write(data);
-      response.end();
-    }
-  });
-};
-
 http.createServer((request, response) => {
   let fs = require('fs');
-
-  let postData = '';
-
-  // 利用 'data' event 消耗掉 data chunk;
-  // 'end' event 才會被 fired
+  let postData = ''; // POST 資料
+  // 利⽤'data' event 消耗掉data chunk;
+  // 'end' event 才會被fired
   request.on('data', (chunk) => {
     postData += chunk;
-
     console.log(
-      '接收的 POST data 片段k: [' + chunk + '].'
+      ' 接收的POST data ⽚段k: [' + chunk + '].'
     );
   });
-
   request.on('end', () => {
-    if (request.url in routingTable) {
-      let obj = routingTable[request.url];
-
-      serve(response, obj.url, obj.type);
-    }
-    else {
-      console.log('未定義的存取: ' + request.url);
-
+    switch (request.url) {
+      case '/':
+      fs.readFile('../htdocs/index.html', (err, data) => {
+        if (err) {
+          console.log(' 檔案讀取錯誤1');
+        }
+        else {
+          response.writeHead(200, {
+            'Content-Type': 'text/html'
+          });
+          response.write(data);
+          response.end();
+        }
+      });
+      break;
+      case '/assets/css/styles.css':
+      fs.readFile('../htdocs/assets/css/styles.css', (err, data) => {
+        if (err) {
+          console.log(' 檔案讀取錯誤2');
+        }
+        else {
+          response.writeHead(200, {
+            'Content-Type': 'text/css'
+          });
+          response.write(data);
+          response.end();
+        }
+      });
+      break;
+      case '/assets/png/SokobanClone_byVellidragon.png':
+      fs.readFile('../htdocs/assets/png/SokobanClone_byVellidragon.png', (err, data) => {
+        if (err) {
+          console.log(' 檔案讀取錯誤3');
+        }
+        else {
+          response.writeHead(200, {
+            'Content-Type': 'image/png'
+          });
+          response.write(data);
+          response.end();
+        }
+      });
+      break;
+      default:
+      console.log(' 未定義的存取: ' + request.url);
       response.end();
+      break;
     }
   });
 }).listen(8088);
-
 // log message to Console
-console.log('伺服器啓動，連線 url:  http://127.0.0.1:8088/');
-
-// index.js
+console.log(' 伺服器啓動，連線url: http://127.0.0.1:8088/');
