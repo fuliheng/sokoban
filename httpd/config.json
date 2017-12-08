@@ -4,8 +4,13 @@
     "type": "text/html"
   },
 
+  "/sokoban.js": {
+    "url": "../htdocs/js/sokoban.js",
+    "type": "application/javascript"
+  },
+
   "/styles.css": {
-    "url": "../htdocs/assets/css/styles.css", 
+    "url": "../htdocs/assets/css/styles.css",
     "type": "text/css"
   },
 

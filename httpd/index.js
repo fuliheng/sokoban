@@ -1,9 +1,9 @@
 /**
  *  @file       index.js
  *  @brief      The entry function of the httpd.
- *  @author     FU LIheng (funono99@gmail.com)
+ *  @author     Yiwei Chiao (ywchiao@gmail.com)
  *  @date       10/03/2017 created.
- *  @date       11/10/2017 last modified.
+ *  @date       11/17/2017 last modified.
  *  @version    0.1.0
  *  @copyright  MIT, (C) 2017 Yiwei Chiao
  *  @details
@@ -31,7 +31,7 @@ let serve = (response, fname, datatype) => {
 
   fs.readFile(fname, (err, data) => {
     if (err) {
-      console.log('檔案讀取錯誤');
+      console.log('檔案讀取錯誤：' + fname);
     }
     else {
       response.writeHead(200, {
@@ -55,7 +55,7 @@ http.createServer((request, response) => {
     postData += chunk;
 
     console.log(
-      '接收的 POST data 片段k: [' + chunk + '].'
+      '接收的 POST data 片段: [' + chunk + '].'
     );
   });
 
