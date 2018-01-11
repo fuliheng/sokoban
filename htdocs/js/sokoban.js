@@ -45,12 +45,12 @@ const SOKOBAN = {
 let levels = [
   [
     "############",
-    "#         .#",
+    "#          #",
     "#          #",
     "#          #",
     "#   ####   #",
     "#          #",
-    "#          #",
+    "#    .     #",
     "#    $     #",
     "#    @     #",
     "#          #",
@@ -247,17 +247,10 @@ let prototypeGameState = {
   moveBoxIn: function (cell) {
     if (this.isGoal(cell)) {
       this.putBoxOnGoal(cell)
+      return this.GameOver(true);
     }
     else {
       this.putBox(cell);
-    };
-
-    return this;
-  },
-
-  GameOver: function () {
-      if (this.isGoal(cell)) {
-      alert("123");
     };
 
     return this;
@@ -444,7 +437,16 @@ let prototypeGameState = {
     this.level[y] = replaceAt(this.level[y], x, SOKOBAN.MAN_ON_GOAL);
 
     return this;
+  },
+
+  GameOver: function (){
+    if (true) {
+          alert("123");
+    }
+
+    return this;
   }
+
 };
 
 /**
