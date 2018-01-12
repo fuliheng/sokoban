@@ -440,9 +440,7 @@ let prototypeGameState = {
   },
 
   GameOver: function (){
-    if (true) {
           alert("123");
-    }
 
     return this;
   }
@@ -574,6 +572,7 @@ let sokoban = {
   update: function (e) {
     this.move(e);
     this.paint();
+    this.GameOver();
   },
 };
 
