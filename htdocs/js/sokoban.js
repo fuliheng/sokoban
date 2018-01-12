@@ -247,7 +247,7 @@ let prototypeGameState = {
   moveBoxIn: function (cell) {
     if (this.isGoal(cell)) {
       this.putBoxOnGoal(cell)
-      return this.GameOver(true);
+
     }
     else {
       this.putBox(cell);
@@ -276,6 +276,7 @@ let prototypeGameState = {
   moveManIn: function (cell) {
     if (this.isGoal(cell)) {
       this.putManOnGoal(cell);
+
     }
     else {
       this.putMan(cell);
@@ -439,7 +440,8 @@ let prototypeGameState = {
     return this;
   },
 
-  GameOver: function (){
+  GameOver: function ({x, y}){
+    if(this.level[y], x == SOKOBAN.GOAL == 0)
           alert("123");
 
     return this;
@@ -571,8 +573,9 @@ let sokoban = {
    */
   update: function (e) {
     this.move(e);
-    this.paint();
     this.GameOver();
+    this.paint();
+
   },
 };
 
