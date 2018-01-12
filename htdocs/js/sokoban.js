@@ -192,7 +192,8 @@ let prototypeGameState = {
   },
 
   isGoal: function ({x, y}) {
-    return (this.level[y].charAt(x) == SOKOBAN.GOAL);
+    return (this.level[y].charAt(x) == SOKOBAN.GOAL)||
+      (this.GameOver(x, y));
   },
 
   isMan: function ({x, y}) {
