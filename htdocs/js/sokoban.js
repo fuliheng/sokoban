@@ -453,7 +453,7 @@ let prototypeGameState = {
       }
     }
     if(finished){
-      alert("123");
+      alert("恭喜你破關了(三學分GET)");
     }
   }
 
