@@ -45,12 +45,12 @@ const SOKOBAN = {
 let levels = [
   [
     "############",
-    "#          #",
+    "#         .#",
     "#          #",
     "#          #",
     "#   ####   #",
     "#          #",
-    "#    .     #",
+    "#          #",
     "#    $     #",
     "#    @     #",
     "#          #",
@@ -192,8 +192,8 @@ let prototypeGameState = {
   },
 
   isGoal: function ({x, y}) {
-    return (this.level[y].charAt(x) == SOKOBAN.GOAL)||
-      (this.GameOver(x, y));
+    return (this.level[y].charAt(x) == SOKOBAN.GOAL);
+
   },
 
   isMan: function ({x, y}) {
@@ -247,7 +247,7 @@ let prototypeGameState = {
 
   moveBoxIn: function (cell) {
     if (this.isGoal(cell)) {
-      this.putBoxOnGoal(cell)
+      this.putBoxOnGoal(cell);
 
     }
     else {
@@ -441,14 +441,24 @@ let prototypeGameState = {
     return this;
   },
 
-  GameOver: function ({x, y}){
-    if(this.level[y], x == SOKOBAN.GOAL == 0)
-          alert("123");
+  GameOver: function (){
 
-    return this;
+    var finished = true,i,j;
+
+    for (var i = 0; i < this.level.length; i++) {
+      for (var j = 0; j < this.level[i].length; j++) {
+        if(this.level[i][j] == SOKOBAN.GOAL||this.level[i][j] == SOKOBAN.BOX){
+          finished = false;
+        }
+      }
+    }
+    if(finished){
+      alert("123");
+    }
   }
 
 };
+
 
 /**
  * 繪出盤面上的格線
@@ -572,11 +582,10 @@ let sokoban = {
    *
    * @returns {undefined}
    */
-  update: function (e) {
+  update: function (e,x,y) {
     this.move(e);
-    this.GameOver();
     this.paint();
-
+    this.GameOver();
   },
 };
 
